@@ -65,9 +65,12 @@ function work() {
         if (err) console.error(err);
         if (err || !doc) return setTimeout(work, 1000);
         console.log("grabbing:", doc._id);
-
+		
+		var url = "https://angel.co/" + doc._id;
+		console.log("url:", url);
+		
         var options = {
-            url: "https://angel.co/" + doc._id,
+            url: url,
             headers: {
                 "Host": "angel.co",
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36"
