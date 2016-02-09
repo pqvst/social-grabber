@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .wrap
+        h1 Super Awesome Social Grabber
+        p Enter a list of company names to check. #[a(href="/progress") Progress]
+
+        form(method="post").pure-form
+            textarea(name="list" placeholder="airbnb\ntwitter\nfacebook\n..." rows="15").pure-u-1
+            br
+            br
+            button(type="submit").pure-button.pure-button-primary Go!

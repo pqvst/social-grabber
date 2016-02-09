@@ -1,0 +1,37 @@
+extends layout
+
+block head
+    meta(http-equiv="refresh" content="3")
+
+block content
+    h1 Progress
+    p Pending: #{pending}
+
+    table.pure-table(width="100%")
+        thead
+            th
+            th Name
+            th Twitter
+            th Facebook
+            th Linkedin
+            th Blog
+            th Company
+        tbody
+            each item in state
+                tr
+                    td
+                        if item.status == "pending"
+                            i.fa.fa-circle-o-notch.fa-spin
+                        else
+                            i.fa.fa-check
+                    td= item.name
+                    td= item.twitter
+                    td= item.facebook
+                    td= item.linkedin
+                    td= item.blog
+                    td= item.company
+
+    br
+    br
+
+    a(href="download").pure-button.pure-button-primary Download (CSV)
