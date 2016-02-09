@@ -6,6 +6,7 @@ var json2csv = require("json2csv");
 var nedb = require("nedb");
 var async = require("async");
 var _ = require("lodash");
+var fs = require("fs");
 
 
 var db = new nedb({ filename: "data.nedb", autoload: true });
@@ -20,6 +21,11 @@ router.get("/progress", (req, res) => {
             });
         });
     });
+});
+
+
+router.get("/last", (req, res) => {
+	res.send(fs.readFileSync("last.html"));
 });
 
 
@@ -69,6 +75,7 @@ function work() {
         };
 
         request(options, (err, resp, body) => {
+			fs.writeFileSync("last.html", body);
             var $ = cheerio.load(body);
             var links = $(".links.mobile");
             var values = {
