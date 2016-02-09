@@ -42,8 +42,9 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     var list = req.body.list.match(/[^\r\n]+/g);
     async.each(list, (name, done) => {
+		var id = name.replace(" ", "-");
         db.insert({
-            _id: _.kebabCase(name),
+            _id: id,
             name: name,
             status: "pending"
         }, () => done());
@@ -57,7 +58,7 @@ function work() {
     db.findOne({ status: "pending" }, (err,doc) => {
         if (err) console.error(err);
         if (err || !doc) return setTimeout(work, 1000);
-        console.log("grabbing:", doc.name);
+        console.log("grabbing:", doc._id);
 
         var options = {
             url: "https://angel.co/" + doc._id,
